@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register Page</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .register-box {
+            background: white;
+            padding: 25px;
+            width: 300px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 14px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #28a745;
+            border: none;
+            color: white;
+            font-size: 15px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1e7e34;
+        }
+
+        .error {
+            color: red;
+            font-size: 13px;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .link {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        .link a {
+            color: #007bff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="register-box">
+    <h2>Register</h2>
+
+    <form onsubmit="return registerUser()">
+        <label>Username</label>
+        <input type="text" id="regUsername">
+
+        <label>Password</label>
+        <input type="password" id="regPassword">
+
+        <label>Confirm Password</label>
+        <input type="password" id="confirmPassword">
+
+        <button type="submit">Register</button>
+        <p class="error" id="errorMsg"></p>
+    </form>
+
+    <div class="link">
+        Already have an account? <a href="login.html">Login</a>
+    </div>
+</div>
+
+<script>
+    function registerUser() {
+        let username = document.getElementById("regUsername").value;
+        let password = document.getElementById("regPassword").value;
+        let confirmPassword = document.getElementById("confirmPassword").value;
+        let errorMsg = document.getElementById("errorMsg");
+
+        if (username === "" || password === "" || confirmPassword === "") {
+            errorMsg.textContent = "Please fill in all fields.";
+            return false;
+        }
+
+        if (password !== confirmPassword) {
+            errorMsg.textContent = "Passwords do not match.";
+            return false;
+        }
+
+        localStorage.setItem("username", username);
+        localStorage.setItem("password", password);
+
+        alert("Registration successful! You may now login.");
+        window.location.href = "login.html";
+        return false;
+    }
+</script>
+
+</body>
+</html>
